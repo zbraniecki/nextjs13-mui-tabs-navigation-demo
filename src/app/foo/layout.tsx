@@ -1,6 +1,6 @@
 "use client";
 
-import '../../globals.css'
+import '../globals.css'
 import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -56,7 +56,7 @@ function getTabIdx(tabs, path) {
   return idx;
 }
 
-export default function RootLayout({
+export default function FooLayout({
   children,
 }: {
   children: React.ReactNode
