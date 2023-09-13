@@ -1,5 +1,6 @@
 "use client";
 
+import '../../globals.css'
 import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -42,9 +43,9 @@ function a11yProps(index: number) {
 }
 
 const tabs = [
-  "/foo",
-  "/bar",
-  "/baz",
+  "/foo/bar",
+  "/foo/baz",
+  "/foo/qux",
 ];
 
 function getTabIdx(tabs, path) {
@@ -55,17 +56,22 @@ function getTabIdx(tabs, path) {
   return idx;
 }
 
-export default function BasicTabs() {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   const path = usePathname();
   const tabIdx = getTabIdx(tabs, path);
 
   return (
+    <>
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={tabIdx} aria-label="basic tabs example">
-          <Tab label="Item One" {...a11yProps(0)} component={Link} href="/foo" />
-          <Tab label="Item Two" {...a11yProps(1)} component={Link} href="/bar" />
-          <Tab label="Item Three" {...a11yProps(2)} component={Link} href="/baz" />
+          <Tab label="Item One" {...a11yProps(0)} component={Link} href="/foo/bar" />
+          <Tab label="Item Two" {...a11yProps(1)} component={Link} href="/foo/baz" />
+          <Tab label="Item Three" {...a11yProps(2)} component={Link} href="/foo/qux" />
         </Tabs>
       </Box>
       <CustomTabPanel value={tabIdx} index={0}>
@@ -78,5 +84,7 @@ export default function BasicTabs() {
         Item Three
       </CustomTabPanel>
     </Box>
-  );
+    {children}
+    </>
+  )
 }
